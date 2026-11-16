@@ -23,6 +23,11 @@ public class DataSeeder implements CommandLineRunner {
     @Override
     @Transactional
     public void run(String... args) {
+
+        if (em.createQuery("select count(a) from Apiary a", Long.class).getSingleResult() > 0) {
+            return;
+        }
+
         Apiary a1 = apiary("AP-001", "Карпатська", "Івано-Франківська обл.", 48.92, 24.71,
                 "Гірська пасіка, акацієвий та лісовий мед");
         Apiary a2 = apiary("AP-002", "Степова", "Херсонська обл.", 46.63, 32.61,
